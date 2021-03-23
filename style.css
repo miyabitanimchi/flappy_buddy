@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive, sans-serif;
+    background: whitesmoke;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.paintcanvas-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#paintcanvas {
+    height: 400px;
+    width: 400px;
+    background: #ffffff;
+    cursor: crosshair;
+}
+
+#apply-buddy-btn {
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+canvas {
+    background: #ffffff;
+}
+/* .game-canvas {
+    background: whitesmoke;
+    min-height: 70vh;
+    min-width: 70vw;
+} */
+
+#accelerate-btn {
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    margin-top: 5px;
+    margin-bottom: 40px;
+}
+
+#pen-btn, #color-picker, #eraser-btn, #trash-btn, #apply-buddy-btn, #accelerate-btn {
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.9rem;
+}
