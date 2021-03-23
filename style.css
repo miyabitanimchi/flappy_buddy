@@ -29,10 +29,34 @@ body {
     align-items: center;
 }
 
-#paintcanvas {
+.paintBtn-container {
+    display: inline-block;
+}
+
+/* Previous */
+/* #paintcanvas {
     height: 400px;
     width: 400px;
     background: #ffffff;
+    cursor: crosshair;
+} */
+
+/* Dynamic pixel grid table */
+#paintcanvas {
+    border-collapse: collapse;
+}
+
+tr {
+    height: 15px;
+}
+
+td {
+    width: 15px;
+    box-sizing: border-box;
+}
+
+#paintcanvas, tr, td {
+    border: 1px dotted gray;
     cursor: crosshair;
 }
 

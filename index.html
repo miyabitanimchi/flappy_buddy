@@ -7,19 +7,31 @@
     <link rel="stylesheet" href="./style.css">
     <title>Flappy what? game</title>
 </head>
-<body onload="startGame()">
+<body>
     <div class="container" id="container">
         <div class="title-container">
-            <h1>Flappy what? game</h1>
+            <h1>Flappy Buddy</h1>
             <h2>Play with your own flappy buddy!</h2>
         </div>
-        <div class="paintcanvas-container">
+        <!-- <div class="paintcanvas-container">
             <div class="paintcanvas" id="paintcanvas">
                 <button id="pen-btn"><i class="fas fa-pen"></i></button>
                 <input type="color" id="color-picker" value="#6aa5b8">
                 <button id="eraser-btn"><i class="fas fa-eraser"></i></button>
                 <button id="trash-btn"><i class="fas fa-trash-alt"></i></button>
             </div>
+            <button id="apply-buddy-btn">Apply your buddy to game!</button>
+        </div> -->
+        <div class="paintcanvas-container">
+            <div class="paintBtn-container">
+                <button id="pen-btn"><i class="fas fa-pen"></i></button>
+                <input type="color" id="color-picker" value="#6aa5b8">
+                <button id="eraser-btn"><i class="fas fa-eraser"></i></button>
+                <button id="trash-btn"><i class="fas fa-trash-alt"></i></button>
+            </div>
+            <table class="paintcanvas" id="paintcanvas">
+                
+            </table>
             <button id="apply-buddy-btn">Apply your buddy to game!</button>
         </div>
         <div class="game-container" id="game-container">
