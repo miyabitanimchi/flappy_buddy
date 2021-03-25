@@ -21,6 +21,9 @@ let birdY = pipeGap = 200;
 let pipeX = canvasSizeX = bulletX = 500;
 let canvasSizeY =  400;
 
+// Define the gap between canvas top to bullet Y
+let fromTopToBulletY = canvasSizeY - bulletY;
+
 // to see if game is being played
 let isPlaying = false;
 
@@ -71,7 +74,7 @@ const gameStarts = () => {
         pipeX < -pipeWidth && // Pipe off screen
         ((pipeX = canvasSizeY), (topPipeBottomY = pipeGap * Math.random())); //Reset pipe and randomize gap
 
-        // // Prepare bullet
+        // Prepare bullet
         bulletX -= 15;
         bulletX < -pipeWidth &&
         ((bulletX = canvasSizeY), (bulletY = 400 * Math.random()));
@@ -96,9 +99,39 @@ const gameStarts = () => {
 
         gameCtx.fillText(`Best score : ${bestScore}`, 10, 45);
 
-        (((birdY < topPipeBottomY || birdY > topPipeBottomY + pipeGap) && pipeX < birdSize * 3 ) // bird hit pipe
-        || birdY > canvasSizeY) && //or bird falls
-        ((birdDY = 0), (birdY = 200), (pipeX = canvasSizeY), (score = 0), (isPlaying = false), (clearInterval(gameLoop))); // bird died
+        (
+            ((birdY < topPipeBottomY || birdY > topPipeBottomY + pipeGap) && pipeX < birdSize * 3 // bird hit pipe,
+            || ((fromTopToBulletY < birdY <= bulletY + 10) && bulletX < birdSize * 3)) // or, bird hit bullet
+                || birdY > canvasSizeY //or, bird falls
+        ) 
+        && // If true, if that happened
+        (
+            // bird dies, reset the values and game 
+            (birdDY = 0), 
+            (birdY = 200), 
+            (pipeX = canvasSizeY), 
+            (bulletX = canvasSizeY),
+            (bulletY = 0),
+            (score = 0), 
+            (isPlaying = false), 
+            (clearInterval(gameLoop))
+        );
+
+        // // This works but doesn't detect bullets
+        // (
+        //     ((birdY < topPipeBottomY || birdY > topPipeBottomY + pipeGap) && pipeX < birdSize * 3 ) // If bird hits pipe,
+        //     || birdY > canvasSizeY
+        // ) && //or, bird falls
+        //     (
+        //         // bird dies, reset the values and game 
+        //         (birdDY = 0), 
+        //         (birdY = 200), 
+        //         (pipeX = canvasSizeY), 
+        //         (score = 0), 
+        //         (isPlaying = false), 
+        //         (clearInterval(gameLoop))
+        //     ); 
+        
 
         if (!isPlaying) {
             gameCtx.font = '20px sans-serif';
