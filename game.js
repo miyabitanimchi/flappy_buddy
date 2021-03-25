@@ -37,7 +37,7 @@ gameCtx.fillText("Click here to play", 140, 200);
 // set up click event
 gameCanvas.addEventListener("click", () => {
     if (isPlaying) {
-    birdDY = 9;
+    birdDY = -9;
     console.log("canvas clicked");
     } else {
         gameStarts();
@@ -65,7 +65,7 @@ const gameStarts = () => {
         gameCtx.drawImage(yourBuddy, birdX, birdY, birdSize * 2, birdSize * 2);
 
         // Deal with gravity
-        birdY -= birdDY -= 0.5;
+        birdY += birdDY += 0.5;
 
         // Prepare pipe
         gameCtx.fillStyle = "blue";
