@@ -33,7 +33,6 @@ const makeGrid = (width, height) => {
             }
             countX ++;
     }
-
     paintCanvas.addEventListener("mousedown", e => {
         console.log("mouse is down");
         isDrawing = true;
@@ -46,7 +45,6 @@ const makeGrid = (width, height) => {
         // console.log(mouseX, mouseY);
         // console.log(colorPicker.value);
     });
-
     paintCanvas.addEventListener("mousemove", e => {
         if (isDrawing === true) {
             console.log("you are drawing");
@@ -65,7 +63,6 @@ const makeGrid = (width, height) => {
             return;
         }    
     });
-
     paintCanvas.addEventListener("mouseup", e => {
         // console.log("mouse is up");
         isDrawing = false;
@@ -79,6 +76,6 @@ const makeGrid = (width, height) => {
 window.addEventListener("load", () => {
     makeGrid(320, 320);
     // startGame();
-    showTestCharOnGameCanvas();
+    // showTestCharOnGameCanvas();
     // makeGravity(185);
 })

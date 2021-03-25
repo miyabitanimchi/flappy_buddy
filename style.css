@@ -33,33 +33,6 @@ body {
     display: inline-block;
 }
 
-/* Previous */
-/* #paintcanvas {
-    height: 400px;
-    width: 400px;
-    background: #ffffff;
-    cursor: crosshair;
-} */
-
-/* Dynamic pixel grid table */
-#paintcanvas {
-    border-collapse: collapse;
-}
-
-tr {
-    height: 15px;
-}
-
-td {
-    width: 15px;
-    box-sizing: border-box;
-}
-
-#paintcanvas, tr, td {
-    border: 1px dotted gray;
-    cursor: crosshair;
-}
-
 #apply-buddy-btn {
     font-family: 'VT323', monospace;
     font-size: 1.5rem;
@@ -70,11 +43,9 @@ td {
 canvas {
     background: #ffffff;
 }
-/* .game-canvas {
-    background: whitesmoke;
-    min-height: 70vh;
-    min-width: 70vw;
-} */
+#gamecanvas {
+    font-family: 'Press Start 2P', cursive, sans-serif;
+}
 
 #accelerate-btn {
     font-family: 'VT323', monospace;
@@ -91,3 +62,9 @@ footer {
     text-align: center;
     font-size: 0.9rem;
 }
+
+/* @media screen and (max-width: 600px) {
+    .container, footer {
+        display: none;
+    }
+} */

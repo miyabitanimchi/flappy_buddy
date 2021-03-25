@@ -1,1 +1,1 @@
-# flappy_what_game
+# flappy_buddy
