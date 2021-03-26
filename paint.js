@@ -1,3 +1,4 @@
+//get DOM
 const container = document.getElementById("container");
 const colorPicker = document.getElementById("color-picker");
 const paintCanvas = document.getElementById("paintcanvas");
@@ -9,8 +10,9 @@ let isDrawing = isErasing = false;
 let mouseX, mouseY;
 let x, y; 
 let drawnArray = [];
+let buddyImg = "flappybird.png"; // if user didn't write anything
 
-
+// function to create squares for canvas grids and pixel art
 const drawSquare = (x, y, width, isFilled) => {
     paintCtx.beginPath();
     // if false(= make grid), make line
@@ -31,6 +33,7 @@ const drawSquare = (x, y, width, isFilled) => {
     paintCtx.closePath();
 }
 
+// function to arrange canvas grids
 const makeGrid = (width, height) => {
     for (let x = 0; x <= width; x += gridSize) {
         for (let y = 0; y <= height; y += gridSize) {
@@ -68,7 +71,8 @@ paintCanvas.addEventListener("mouseup", e => {
 const fillGrid = () => {
     let col = Math.floor(mouseX / gridSize);
     let row = Math.floor(mouseY / gridSize);
-    x = col * gridSize;
+    // modified to detect (x, y) for each grid
+    x = col * gridSize; 
     y = row * gridSize;
 }
 
@@ -83,6 +87,13 @@ document.getElementById("trash-btn").addEventListener("click", () => {
 const activateEraser = () => {
     isErasing = true;
     document.getElementById("eraser-btn").classList.add("activate-eraser");
+}
+
+// Get buddy data 
+const getBuddyData = () => {
+    dataURI = paintCanvas.toDataURL();
+
+    console.log(dataURI);
 }
 //  const showImgWithTransparentBG = (imgSrc) => { 
 

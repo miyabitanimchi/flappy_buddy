@@ -1,3 +1,4 @@
+//get DOM
 const gameContainer = document.getElementById("game-container");
 const accelerateBtn = document.getElementById("accelerate-btn");
 const gameCanvas = document.getElementById("gamecanvas");
@@ -5,7 +6,7 @@ const gameCtx = gameCanvas.getContext("2d");
 
 // Your buddy(img you drew), create a new Image() from the image class
 let yourBuddy = new Image();
-yourBuddy.src = "flappybird.png";
+yourBuddy.src = buddyImg;
 
 // Set the initial values to zero (coordinate X Y for buddy and score/bestscore)
 let buddyX = buddyDY = score = bestScore = bulletY = 0;
@@ -108,88 +109,40 @@ const gameStarts = () => {
 
         gameCtx.fillText(`Best score : ${bestScore}`, 10, 45);
 
-        // (
-        //     ((buddyY < topPipeBottomY || buddyY > topPipeBottomY + pipeGap) && pipeX < yourBuddySize * 3 // buddy hit pipe,
-        //     || ((fromBottomToBulletY < buddyY <= bulletY + 10) && bulletX < yourBuddySize * 3)) // or, buddy hit bullet
-        //         || buddyY > canvasSizeY //or, buddy falls
-        // ) 
-        // && // If true, if that happened
-        // (
-        //     // buddy dies, reset the values and game 
-        //     (buddyDY = 0), 
-        //     (buddyY = 200), 
-        //     (pipeX = canvasSizeY), 
-        //     (bulletX = canvasSizeY),
-        //     (bulletY = 0),
-        //     (score = 0), 
-        //     (isPlaying = false), 
-        //     (clearInterval(gameLoop))
-        // );
-
-        // console.log(`This is the gap from top to bulletY: ${fromBottomToBulletY}`);
-        // console.log(`bulletY: ${bulletY}`);
-        // console.log(`buddyY: ${buddyY}`);
-        // console.log(bottomOfImg);
-        
-
         // buddy hit pipe
         if (((buddyY < topPipeBottomY || buddyY > topPipeBottomY + pipeGap) && pipeX < yourBuddySize * 3)) {
-            buddyDY = 0;
-            buddyY = 200;
-            pipeX = canvasSizeY;
-            bulletX = canvasSizeY;
-            bulletY = 0;
-            score = 0;
-            isPlaying = false;
+            resetGame();
             clearInterval(gameLoop);
         }
         // buddy hit bullet
         if (((buddyY <= bulletY) && (bulletY < bottomOfImg)) && (bulletX < yourBuddySize * 3 / 1.5)) {
-            buddyDY = 0;
-            buddyY = 200;
-            pipeX = canvasSizeY;
-            bulletX = canvasSizeY;
-            bulletY = 0;
-            score = 0;
-            isPlaying = false;
+            resetGame();
             clearInterval(gameLoop);
         }
 
         // buddy falls
         if (buddyY > canvasSizeY) {
-            buddyDY = 0;
-            buddyY = 200;
-            pipeX = canvasSizeY;
-            bulletX = canvasSizeY;
-            bulletY = 0;
-            score = 0;
-            isPlaying = false;
+            resetGame();
             clearInterval(gameLoop);
         }
-        
-        // // This works but doesn't detect bullets
-        // (
-        //     ((buddyY < topPipeBottomY || buddyY > topPipeBottomY + pipeGap) && pipeX < yourBuddySize * 3 ) // If buddy hits pipe,
-        //     || buddyY > canvasSizeY
-        // ) && //or, buddy falls
-        //     (
-        //         // buddy dies, reset the values and game 
-        //         (buddyDY = 0), 
-        //         (buddyY = 200), 
-        //         (pipeX = canvasSizeY), 
-        //         (score = 0), 
-        //         (isPlaying = false), 
-        //         (clearInterval(gameLoop))
-        //     ); 
-        
 
         if (!isPlaying) {
             gameCtx.font = '20px sans-serif';
             gameCtx.fillText("Game Over... click here to play again!", 70, 170);
+            console.log(buddyImg);
         }
     }, 25);    
 }
 
- 
+ //function to reset the game
+ const resetGame = () => {
+    buddyDY = 0;
+    buddyY = 200;
+    pipeX = canvasSizeY;
+    bulletX = canvasSizeY;
+    bulletY = 0;
+    score = 0;
+    isPlaying = false;
+ }
 
 // if (((buddyY <= bulletY) && (bulletY < bottomOfImg)) && (pipeX < yourBuddySize * 3)) {
