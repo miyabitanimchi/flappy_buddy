@@ -6,17 +6,17 @@ const paintCtx = paintCanvas.getContext("2d");
 const paintCanvasWidth = 320;
 const paintCanvasHeight = 320;
 const gridSize = 10;
-let isDrawing = isErasing = false; 
+let isDrawing = isErasing = eraserActivated = false; 
 let mouseX, mouseY;
 let x, y; 
 let drawnArray = [];
 let buddyImg = "flappybird.png"; // if user didn't write anything
 
 // function to create squares for canvas grids and pixel art
-const drawSquare = (x, y, width, isFilled) => {
+const makeSquare = (x, y, width, isFilled) => {
     paintCtx.beginPath();
     // if false(= make grid), make line
-    if (isFilled === false) {
+    if (isFilled === false || isErasing === true) {
         paintCtx.strokeStyle = "lightgray"; 
         paintCtx.lineWitdh = 0.1;
     }
@@ -27,9 +27,23 @@ const drawSquare = (x, y, width, isFilled) => {
     paintCtx.lineTo(x, y);
     paintCtx.stroke();
     if (isFilled) {
+        if (isErasing) {
+            paintCtx.fillStyle = "white";
+            paintCtx.fill();
+            paintCtx.strokeStyle = "lightgray"; 
+            paintCtx.lineWitdh = 0.1;
+            paintCtx.moveTo(x, y);
+            paintCtx.lineTo(x + width, y);
+            paintCtx.lineTo(x + width, y + width);
+            paintCtx.lineTo(x, y + width);
+            paintCtx.lineTo(x, y);
+            paintCtx.stroke();
+        } else {
         paintCtx.fillStyle = `${colorPicker.value}`;
         paintCtx.fill();
-    } 
+        }
+        
+    }
     paintCtx.closePath();
 }
 
@@ -37,36 +51,43 @@ const drawSquare = (x, y, width, isFilled) => {
 const makeGrid = (width, height) => {
     for (let x = 0; x <= width; x += gridSize) {
         for (let y = 0; y <= height; y += gridSize) {
-            drawSquare(x, y, gridSize, false);
+            makeSquare(x, y, gridSize, false);
         }
     }
  }
 
-
-paintCanvas.addEventListener("mousedown", e => {
-    isDrawing = true;
-    mouseX = e.offsetX;
-    mouseY = e.offsetY;
-    fillGrid();
-    drawSquare(x, y, gridSize, true);
-    console.log(x, y);
-    
-});
-paintCanvas.addEventListener("mousemove", e => {
-    if (isDrawing === true) {
-        // console.log("you are drawing");
+const drawSquare = () => {
+    paintCanvas.addEventListener("mousedown", e => {
         mouseX = e.offsetX;
         mouseY = e.offsetY;
+        // (!isErasing) && (isDrawing = true);
+        if (!eraserActivated) {
+            isDrawing = true;
+        } else if (eraserActivated) {
+            isErasing = true;
+        }
+        fillGrid();
+        makeSquare(x, y, gridSize, true);
         console.log(x, y);
-        fillGrid()
-        drawSquare(x, y, gridSize, true);
-    } else {
-        return;
-    }    
-});
-paintCanvas.addEventListener("mouseup", e => {
-    isDrawing = false;
-});
+        
+    });
+    paintCanvas.addEventListener("mousemove", e => {
+        mouseX = e.offsetX;
+        mouseY = e.offsetY;
+        if ((isDrawing === true && isErasing === false) 
+        || (isDrawing === false && isErasing === true)) {
+            console.log(x, y);
+            fillGrid()
+            makeSquare(x, y, gridSize, true);
+        } else {
+            return;
+        }    
+    });
+    paintCanvas.addEventListener("mouseup", e => {
+        isDrawing = false;
+        isErasing = false;
+    });
+}
 
 const fillGrid = () => {
     let col = Math.floor(mouseX / gridSize);
@@ -81,20 +102,40 @@ document.getElementById("trash-btn").addEventListener("click", () => {
     paintCtx.fillStyle = "white";
     paintCtx.fillRect(0, 0, paintCanvasWidth, paintCanvasHeight);
     makeGrid(paintCanvasWidth, paintCanvasHeight);
+    isDrawing = isErasing = eraserActivated = false; 
+    document.getElementById("eraser-btn").classList.remove("activate-eraser");
+    document.getElementById("pen-btn").classList.add("activate-pen");
 })
 
 // eraser
 const activateEraser = () => {
-    isErasing = true;
+    eraserActivated = true;
+    isDrawing = false;
+    drawSquare();
+    document.getElementById("pen-btn").classList.remove("activate-pen");
     document.getElementById("eraser-btn").classList.add("activate-eraser");
+}
+
+// Pen (for when load and reactivate)
+const activePen = () => {
+    console.log("pen is clicked")
+    eraserActivated = isErasing = false;
+    document.getElementById("eraser-btn").classList.remove("activate-eraser");
+    document.getElementById("pen-btn").classList.add("activate-pen");
 }
 
 // Get buddy data 
 const getBuddyData = () => {
-    dataURI = paintCanvas.toDataURL();
+    buddyImg = paintCanvas.toDataURL();
 
-    console.log(dataURI);
+    console.log(buddyImg);
 }
+
+window.addEventListener("load", () => {
+    makeGrid(paintCanvasWidth, paintCanvasHeight);
+    drawSquare();
+    activePen();
+});
 //  const showImgWithTransparentBG = (imgSrc) => { 
 
 //     let yourBuddy = new Image();
@@ -141,6 +182,3 @@ const getBuddyData = () => {
 //  }
 
 
-window.addEventListener("load", () => {
-    makeGrid(paintCanvasWidth, paintCanvasHeight);
-})
