@@ -73,33 +73,51 @@ const makeGrid = (width, height) => {
     });
  }
 
- // Function to make background transparent
- const showImgWithTransparentBG = (imgSrc) => {
-    // Your buddy(img you drew), create a new Image() from the image class
-    let yourBuddy = new Image();
-    yourBuddy.src = imgSrc;
+//  const showImgWithTransparentBG = (imgSrc) => { 
 
-     const transparentColor = {
-         r : 255,
-         g : 255,
-         b : 255
-     };
+//     let yourBuddy = new Image();
+//     yourBuddy.src = imgSrc;
 
-     // Draw bird
-     gameCtx.drawImage(yourBuddy, birdX, birdY, birdSize * 2, birdSize * 2);
+//     const transparentColor = {
+//         r : 255,
+//         g : 255,
+//         b : 255
+//     };
 
-     let pixels = gameCtx.getImageData(birdX, birdY, yourBuddy.width, yourBuddy.height);
-     for (let i = 0; i < pixels.data.length; i += 4) {
-         let r = pixels.data[i];
-         let g = pixels.data[i+1];
-         let b = pixels.data[i+2];
+//     // create a source canvas. This is our pixel source
+//     const srcCanvas = document.createElement("canvas");
+//     srcCanvas.width = yourBuddy.width;
+//     srcCanvas.height = yourBuddy.height;
 
-         if (r == transparentColor.r && g== transparentColor.g && b == transparentColor.b) {
-             pixels.data[i+3] = 0;
-         }
-     }
-     gameCanvas.putImsgeData(pixels, 0, 0);
- }
+//      // create a destination canvas. Here the altered image will be placed
+//      const dstCanvas = document.createElement("canvas");
+//      dstCanvas.width = yourBuddy.width;
+//      dstCanvas.height = yourBuddy.height;
+
+//      // append the canvas elements to the container
+//      document.getElementById("paintcanvas-container2").appendChild(srcCanvas);
+//     document.getElementById("paintcanvas-container2").appendChild(dstCanvas);
+
+//      // get context to work with
+//      const srcCtx = dstCanvas.getContext("2d");
+//      const dstCtx = dstCanvas.getContext("2d");
+
+//      // Draw bird
+//      gameCtx.drawImage(yourBuddy, 0, 0);
+
+//      let pixels = srcCtx.getImageData(0, 0, yourBuddy.width, yourBuddy.height);
+//      for (let i = 0; i < pixels.data.length; i += 4) {
+//          let r = pixels.data[i];
+//          let g = pixels.data[i+1];
+//          let b = pixels.data[i+2];
+
+//          if (r == transparentColor.r && g== transparentColor.g && b == transparentColor.b) {
+//              pixels.data[i+3] = 0;
+//          }
+//      }
+//      gameCtx.putImageData(pixels, 0, 0);
+//  }
+
 
 window.addEventListener("load", () => {
     makeGrid(320, 320);
