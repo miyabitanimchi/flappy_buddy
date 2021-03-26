@@ -29,13 +29,21 @@ body {
     align-items: center;
 }
 
+#paintcanvas {
+    cursor: crosshair;
+}
+
 .paintBtn-container {
     display: inline-block;
 }
 
+.activate-eraser {
+    filter: brightness(130%);
+}
+
 #apply-buddy-btn {
     font-family: 'VT323', monospace;
-    font-size: 1.5rem;
+    font-size: 1.5rem!important;
     margin-top: 5px;
     margin-bottom: 20px;
 }
@@ -43,19 +51,16 @@ body {
 canvas {
     background: #ffffff;
 }
+
 #gamecanvas {
     font-family: 'Press Start 2P', cursive, sans-serif;
 }
 
-#accelerate-btn {
-    font-family: 'VT323', monospace;
-    font-size: 1.5rem;
-    margin-top: 5px;
-    margin-bottom: 40px;
-}
-
 #pen-btn, #color-picker, #eraser-btn, #trash-btn, #apply-buddy-btn, #accelerate-btn {
     cursor: pointer;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 1rem;
 }
 
 footer {

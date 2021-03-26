@@ -7,17 +7,17 @@ const gameCtx = gameCanvas.getContext("2d");
 let yourBuddy = new Image();
 yourBuddy.src = "flappybird.png";
 
-// Set the initial values to zero (coordinate X Y for bird and score/bestscore)
-let birdX = birdDY = score = bestScore = bulletY = 0;
+// Set the initial values to zero (coordinate X Y for buddy and score/bestscore)
+let buddyX = buddyDY = score = bestScore = bulletY = 0;
 
-// Set bird size and coordinate Y for tip of upper pipe
+// Set buddy size and coordinate Y for tip of upper pipe
 let yourBuddySize = topPipeBottomY = 20;
 
 //pipe width 
 let pipeWidth = 30;
 
-// set coordinate Y for bird and gap of pipe
-let birdY = pipeGap = 200;
+// set coordinate Y for buddy and gap of pipe
+let buddyY = pipeGap = 200;
 let pipeX = canvasSizeX = bulletX = 500;
 let canvasSizeY =  400;
 
@@ -40,7 +40,7 @@ gameCtx.fillText("Click here to play", 140, 200);
 // set up click event
 gameCanvas.addEventListener("click", () => {
     if (isPlaying) {
-    birdDY = -7;
+    buddyDY = -7;
     console.log("canvas clicked");
     } else {
         gameStarts();
@@ -56,7 +56,7 @@ const gameStarts = () => {
             }
         
         // //Implement img
-        // showImgWithTransparentBG("bird.jpeg");
+        // showImgWithTransparentBG("buddy.jpeg");
 
         // Set the background color 
         gameCtx.fillStyle = "white"
@@ -64,11 +64,11 @@ const gameStarts = () => {
         // Draw the canvas 
         gameCtx.fillRect(0, 0, canvasSizeX, canvasSizeY);
 
-        // Draw bird
-        gameCtx.drawImage(yourBuddy, birdX, birdY, yourBuddySize * 2, yourBuddySize * 2);
+        // Draw buddy
+        gameCtx.drawImage(yourBuddy, buddyX, buddyY, yourBuddySize * 2, yourBuddySize * 2);
 
         // Deal with gravity
-        birdY += birdDY += 0.4;
+        buddyY += buddyDY += 0.4;
 
         // Prepare pipe
         gameCtx.fillStyle = "blue";
@@ -86,7 +86,7 @@ const gameStarts = () => {
         fromBottomToBulletY = canvasSizeY - bulletY;
 
         //Get y coordinate for the bottom of the image
-        bottomOfImg = birdY + (yourBuddySize * 3);
+        bottomOfImg = buddyY + (yourBuddySize * 3);
 
         // create pipes
         gameCtx.fillRect(pipeX, 0, pipeWidth, topPipeBottomY);
@@ -109,15 +109,15 @@ const gameStarts = () => {
         gameCtx.fillText(`Best score : ${bestScore}`, 10, 45);
 
         // (
-        //     ((birdY < topPipeBottomY || birdY > topPipeBottomY + pipeGap) && pipeX < yourBuddySize * 3 // bird hit pipe,
-        //     || ((fromBottomToBulletY < birdY <= bulletY + 10) && bulletX < yourBuddySize * 3)) // or, bird hit bullet
-        //         || birdY > canvasSizeY //or, bird falls
+        //     ((buddyY < topPipeBottomY || buddyY > topPipeBottomY + pipeGap) && pipeX < yourBuddySize * 3 // buddy hit pipe,
+        //     || ((fromBottomToBulletY < buddyY <= bulletY + 10) && bulletX < yourBuddySize * 3)) // or, buddy hit bullet
+        //         || buddyY > canvasSizeY //or, buddy falls
         // ) 
         // && // If true, if that happened
         // (
-        //     // bird dies, reset the values and game 
-        //     (birdDY = 0), 
-        //     (birdY = 200), 
+        //     // buddy dies, reset the values and game 
+        //     (buddyDY = 0), 
+        //     (buddyY = 200), 
         //     (pipeX = canvasSizeY), 
         //     (bulletX = canvasSizeY),
         //     (bulletY = 0),
@@ -128,14 +128,14 @@ const gameStarts = () => {
 
         // console.log(`This is the gap from top to bulletY: ${fromBottomToBulletY}`);
         // console.log(`bulletY: ${bulletY}`);
-        // console.log(`birdY: ${birdY}`);
+        // console.log(`buddyY: ${buddyY}`);
         // console.log(bottomOfImg);
         
 
-        // Bird hit pipe
-        if (((birdY < topPipeBottomY || birdY > topPipeBottomY + pipeGap) && pipeX < yourBuddySize * 3)) {
-            birdDY = 0;
-            birdY = 200;
+        // buddy hit pipe
+        if (((buddyY < topPipeBottomY || buddyY > topPipeBottomY + pipeGap) && pipeX < yourBuddySize * 3)) {
+            buddyDY = 0;
+            buddyY = 200;
             pipeX = canvasSizeY;
             bulletX = canvasSizeY;
             bulletY = 0;
@@ -143,10 +143,10 @@ const gameStarts = () => {
             isPlaying = false;
             clearInterval(gameLoop);
         }
-        // bird hit bullet
-        if (((birdY <= bulletY) && (bulletY < bottomOfImg)) && (bulletX < yourBuddySize * 3 / 1.5)) {
-            birdDY = 0;
-            birdY = 200;
+        // buddy hit bullet
+        if (((buddyY <= bulletY) && (bulletY < bottomOfImg)) && (bulletX < yourBuddySize * 3 / 1.5)) {
+            buddyDY = 0;
+            buddyY = 200;
             pipeX = canvasSizeY;
             bulletX = canvasSizeY;
             bulletY = 0;
@@ -155,10 +155,10 @@ const gameStarts = () => {
             clearInterval(gameLoop);
         }
 
-        // bird falls
-        if (birdY > canvasSizeY) {
-            birdDY = 0;
-            birdY = 200;
+        // buddy falls
+        if (buddyY > canvasSizeY) {
+            buddyDY = 0;
+            buddyY = 200;
             pipeX = canvasSizeY;
             bulletX = canvasSizeY;
             bulletY = 0;
@@ -169,13 +169,13 @@ const gameStarts = () => {
         
         // // This works but doesn't detect bullets
         // (
-        //     ((birdY < topPipeBottomY || birdY > topPipeBottomY + pipeGap) && pipeX < yourBuddySize * 3 ) // If bird hits pipe,
-        //     || birdY > canvasSizeY
-        // ) && //or, bird falls
+        //     ((buddyY < topPipeBottomY || buddyY > topPipeBottomY + pipeGap) && pipeX < yourBuddySize * 3 ) // If buddy hits pipe,
+        //     || buddyY > canvasSizeY
+        // ) && //or, buddy falls
         //     (
-        //         // bird dies, reset the values and game 
-        //         (birdDY = 0), 
-        //         (birdY = 200), 
+        //         // buddy dies, reset the values and game 
+        //         (buddyDY = 0), 
+        //         (buddyY = 200), 
         //         (pipeX = canvasSizeY), 
         //         (score = 0), 
         //         (isPlaying = false), 
@@ -192,4 +192,4 @@ const gameStarts = () => {
 
  
 
-// if (((birdY <= bulletY) && (bulletY < bottomOfImg)) && (pipeX < yourBuddySize * 3)) {
+// if (((buddyY <= bulletY) && (bulletY < bottomOfImg)) && (pipeX < yourBuddySize * 3)) {
