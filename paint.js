@@ -10,7 +10,9 @@ let isDrawing = isErasing = eraserActivated = false;
 let mouseX, mouseY;
 let x, y; 
 let drawnArray = [];
-let buddyImg = "flappybird.png"; // if user didn't write anything
+let defaultImg = "flappybird.png"; // if user didn't write anything
+let yourBuddyImg;
+let isDrawn = false;
 
 // function to create squares for canvas grids and pixel art
 const makeSquare = (x, y, width, isFilled) => {
@@ -118,7 +120,6 @@ const activateEraser = () => {
 
 // Pen (for when load and reactivate)
 const activePen = () => {
-    console.log("pen is clicked")
     eraserActivated = isErasing = false;
     document.getElementById("eraser-btn").classList.remove("activate-eraser");
     document.getElementById("pen-btn").classList.add("activate-pen");
@@ -126,9 +127,10 @@ const activePen = () => {
 
 // Get buddy data 
 const getBuddyData = () => {
-    buddyImg = paintCanvas.toDataURL();
-
-    console.log(buddyImg);
+    yourBuddyImg = paintCanvas.toDataURL();
+    console.log(yourBuddyImg);
+    isDrawn = true;
+    replaceBuddy();
 }
 
 window.addEventListener("load", () => {

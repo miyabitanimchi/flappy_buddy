@@ -4,9 +4,22 @@ const accelerateBtn = document.getElementById("accelerate-btn");
 const gameCanvas = document.getElementById("gamecanvas");
 const gameCtx = gameCanvas.getContext("2d");
 
-// Your buddy(img you drew), create a new Image() from the image class
-let yourBuddy = new Image();
-yourBuddy.src = buddyImg;
+// Default buddy(img you drew), create a new Image() from the image class
+let defaultBuddy = new Image();
+defaultBuddy.src = defaultImg;
+
+let yourBuddy 
+
+// The buddy you created, create a new Image() from the image class, and delete defaultBuddy
+const replaceBuddy = () => {
+    if (isDrawn === true) {
+        yourBuddy = new Image();
+        yourBuddy.src = yourBuddyImg;
+
+        defaultBuddy = "";
+        console.log(yourBuddy);
+    }
+}
 
 // Set the initial values to zero (coordinate X Y for buddy and score/bestscore)
 let buddyX = buddyDY = score = bestScore = bulletY = 0;
@@ -66,7 +79,11 @@ const gameStarts = () => {
         gameCtx.fillRect(0, 0, canvasSizeX, canvasSizeY);
 
         // Draw buddy
-        gameCtx.drawImage(yourBuddy, buddyX, buddyY, yourBuddySize * 2, yourBuddySize * 2);
+        if (isDrawn === true) {
+            gameCtx.drawImage(yourBuddy, buddyX, buddyY, yourBuddySize * 2, yourBuddySize * 2)
+        } else {
+            gameCtx.drawImage(defaultBuddy, buddyX, buddyY, yourBuddySize * 2, yourBuddySize * 2);
+        }
 
         // Deal with gravity
         buddyY += buddyDY += 0.4;
@@ -129,7 +146,7 @@ const gameStarts = () => {
         if (!isPlaying) {
             gameCtx.font = '20px sans-serif';
             gameCtx.fillText("Game Over... click here to play again!", 70, 170);
-            console.log(buddyImg);
+            console.log(yourBuddyImg);
         }
     }, 25);    
 }
