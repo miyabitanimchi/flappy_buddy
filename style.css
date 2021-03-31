@@ -49,11 +49,7 @@ body {
 }
 
 canvas {
-    background: #ffffff;
-}
-
-#gamecanvas {
-    font-family: 'Press Start 2P', cursive, sans-serif;
+    background: white;
 }
 
 #pen-btn, #color-picker, #eraser-btn, #trash-btn, #apply-buddy-btn, #accelerate-btn {

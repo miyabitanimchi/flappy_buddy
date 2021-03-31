@@ -14,14 +14,18 @@ let defaultImg = "flappybird.png"; // if user didn't write anything
 let yourBuddyImg;
 let isDrawn = false;
 
+// Border for paint canvas
+paintCanvas.style.border = "1px solid lightgray";
+
 // function to create squares for canvas grids and pixel art
 const makeSquare = (x, y, width, isFilled) => {
     paintCtx.beginPath();
     // if false(= make grid), make line
     if (isFilled === false || isErasing === true) {
-        paintCtx.strokeStyle = "lightgray"; 
+        paintCtx.strokeStyle = "rgba(244, 244, 244, 0.5)"; 
         paintCtx.lineWitdh = 0.1;
     }
+    // make square shape
     paintCtx.moveTo(x, y);
     paintCtx.lineTo(x + width, y);
     paintCtx.lineTo(x + width, y + width);
@@ -30,9 +34,11 @@ const makeSquare = (x, y, width, isFilled) => {
     paintCtx.stroke();
     if (isFilled) {
         if (isErasing) {
+            // If it's for eraser
             paintCtx.fillStyle = "white";
-            paintCtx.fill();
-            paintCtx.strokeStyle = "lightgray"; 
+            paintCtx.fill(); // make white square first to overwhite painting
+            // then put line on the white square
+            paintCtx.strokeStyle = "rgba(244, 244, 244, 0.5)"; 
             paintCtx.lineWitdh = 0.1;
             paintCtx.moveTo(x, y);
             paintCtx.lineTo(x + width, y);
@@ -41,12 +47,11 @@ const makeSquare = (x, y, width, isFilled) => {
             paintCtx.lineTo(x, y);
             paintCtx.stroke();
         } else {
+        // when it's to paint
         paintCtx.fillStyle = `${colorPicker.value}`;
         paintCtx.fill();
         }
-        
     }
-    paintCtx.closePath();
 }
 
 // function to arrange canvas grids
@@ -58,11 +63,11 @@ const makeGrid = (width, height) => {
     }
  }
 
+ // Draw or erase
 const drawSquare = () => {
     paintCanvas.addEventListener("mousedown", e => {
         mouseX = e.offsetX;
         mouseY = e.offsetY;
-        // (!isErasing) && (isDrawing = true);
         if (!eraserActivated) {
             isDrawing = true;
         } else if (eraserActivated) {
@@ -127,6 +132,7 @@ const activePen = () => {
 
 // Get buddy data 
 const getBuddyData = () => {
+    
     yourBuddyImg = paintCanvas.toDataURL();
     console.log(yourBuddyImg);
     isDrawn = true;
@@ -138,49 +144,3 @@ window.addEventListener("load", () => {
     drawSquare();
     activePen();
 });
-//  const showImgWithTransparentBG = (imgSrc) => { 
-
-//     let yourBuddy = new Image();
-//     yourBuddy.src = imgSrc;
-
-//     const transparentColor = {
-//         r : 255,
-//         g : 255,
-//         b : 255
-//     };
-
-//     // create a source canvas. This is our pixel source
-//     const srcCanvas = document.createElement("canvas");
-//     srcCanvas.width = yourBuddy.width;
-//     srcCanvas.height = yourBuddy.height;
-
-//      // create a destination canvas. Here the altered image will be placed
-//      const dstCanvas = document.createElement("canvas");
-//      dstCanvas.width = yourBuddy.width;
-//      dstCanvas.height = yourBuddy.height;
-
-//      // append the canvas elements to the container
-//      document.getElementById("paintcanvas-container2").appendChild(srcCanvas);
-//     document.getElementById("paintcanvas-container2").appendChild(dstCanvas);
-
-//      // get context to work with
-//      const srcCtx = dstCanvas.getContext("2d");
-//      const dstCtx = dstCanvas.getContext("2d");
-
-//      // Draw bird
-//      gameCtx.drawImage(yourBuddy, 0, 0);
-
-//      let pixels = srcCtx.getImageData(0, 0, yourBuddy.width, yourBuddy.height);
-//      for (let i = 0; i < pixels.data.length; i += 4) {
-//          let r = pixels.data[i];
-//          let g = pixels.data[i+1];
-//          let b = pixels.data[i+2];
-
-//          if (r == transparentColor.r && g== transparentColor.g && b == transparentColor.b) {
-//              pixels.data[i+3] = 0;
-//          }
-//      }
-//      gameCtx.putImageData(pixels, 0, 0);
-//  }
-
-

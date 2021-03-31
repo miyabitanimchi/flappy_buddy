@@ -8,7 +8,7 @@ const gameCtx = gameCanvas.getContext("2d");
 let defaultBuddy = new Image();
 defaultBuddy.src = defaultImg;
 
-let yourBuddy 
+let yourBuddy;
 
 // The buddy you created, create a new Image() from the image class, and delete defaultBuddy
 const replaceBuddy = () => {
@@ -73,7 +73,7 @@ const gameStarts = () => {
         // showImgWithTransparentBG("buddy.jpeg");
 
         // Set the background color 
-        gameCtx.fillStyle = "white"
+        gameCtx.fillStyle = "white";
 
         // Draw the canvas 
         gameCtx.fillRect(0, 0, canvasSizeX, canvasSizeY);
@@ -118,7 +118,7 @@ const gameStarts = () => {
         // Create bullet
         gameCtx.fillRect(bulletX, bulletY, pipeWidth, 10);
         // start with other elements like score
-        gameCtx.fillStyle = "black";
+        gameCtx.fillStyle = "blue";
         gameCtx.font = '15px sans-serif';
         gameCtx.fillText(score++, 10, 25); // Increase and draw score
 
@@ -127,7 +127,7 @@ const gameStarts = () => {
         gameCtx.fillText(`Best score : ${bestScore}`, 10, 45);
 
         // buddy hit pipe
-        if (((buddyY < topPipeBottomY || buddyY > topPipeBottomY + pipeGap) && pipeX < yourBuddySize * 3)) {
+        if (((buddyY < topPipeBottomY || buddyY > topPipeBottomY + pipeGap) && pipeX < yourBuddySize * 2)) {
             resetGame();
             clearInterval(gameLoop);
         }
