@@ -1,4 +1,3 @@
-//get DOM
 const container = document.getElementById("container");
 const colorPicker = document.getElementById("color-picker");
 const paintCanvas = document.getElementById("paintcanvas");
@@ -6,13 +5,10 @@ const paintCtx = paintCanvas.getContext("2d");
 const paintCanvasWidth = 320;
 const paintCanvasHeight = 320;
 const gridSize = 10;
-let isDrawing = isErasing = eraserActivated = false; 
-let mouseX, mouseY;
-let x, y; 
-let drawnArray = [];
+let isDrawing = isErasing = eraserActivated = isDrawn = false; 
+let mouseX, mouseY, x, y;
 let defaultImg = "flappybird.png"; // if user didn't write anything
 let yourBuddyImg;
-let isDrawn = false;
 
 // Border for paint canvas
 paintCanvas.style.border = "1px solid lightgray";
@@ -47,7 +43,7 @@ const makeSquare = (x, y, width, isFilled) => {
             paintCtx.lineTo(x, y);
             paintCtx.stroke();
         } else {
-        // when it's to paint
+        // else... when it's for painting
         paintCtx.fillStyle = `${colorPicker.value}`;
         paintCtx.fill();
         }
@@ -63,17 +59,17 @@ const makeGrid = (width, height) => {
     }
  }
 
- // Draw or erase
+ // Draw or erase with squares
 const drawSquare = () => {
     paintCanvas.addEventListener("mousedown", e => {
         mouseX = e.offsetX;
         mouseY = e.offsetY;
-        if (!eraserActivated) {
-            isDrawing = true;
-        } else if (eraserActivated) {
-            isErasing = true;
+        if (!eraserActivated) { //When eraser button is not pressed
+            isDrawing = isDrawn = true; // true to get ready to draw
+        } else if (eraserActivated) { // When eraser button is pressed, eraserActivated gets true
+            isErasing = true; // true to get ready to erase
         }
-        fillGrid();
+        getCoordinateOfEachGrid();
         makeSquare(x, y, gridSize, true);
         console.log(x, y);
         
@@ -81,10 +77,9 @@ const drawSquare = () => {
     paintCanvas.addEventListener("mousemove", e => {
         mouseX = e.offsetX;
         mouseY = e.offsetY;
-        if ((isDrawing === true && isErasing === false) 
-        || (isDrawing === false && isErasing === true)) {
-            console.log(x, y);
-            fillGrid()
+        if ((isDrawing === true && isErasing === false) // For when drawing
+        || (isDrawing === false && isErasing === true)) { // For when erasing
+            getCoordinateOfEachGrid()
             makeSquare(x, y, gridSize, true);
         } else {
             return;
@@ -96,7 +91,8 @@ const drawSquare = () => {
     });
 }
 
-const fillGrid = () => {
+// Find each coordinate of each square
+const getCoordinateOfEachGrid = () => {
     let col = Math.floor(mouseX / gridSize);
     let row = Math.floor(mouseY / gridSize);
     // modified to detect (x, y) for each grid
@@ -109,7 +105,7 @@ document.getElementById("trash-btn").addEventListener("click", () => {
     paintCtx.fillStyle = "white";
     paintCtx.fillRect(0, 0, paintCanvasWidth, paintCanvasHeight);
     makeGrid(paintCanvasWidth, paintCanvasHeight);
-    isDrawing = isErasing = eraserActivated = false; 
+    isDrawing = isErasing = eraserActivated = isDrawn = false; 
     document.getElementById("eraser-btn").classList.remove("activate-eraser");
     document.getElementById("pen-btn").classList.add("activate-pen");
 })
@@ -132,11 +128,9 @@ const activePen = () => {
 
 // Get buddy data 
 const getBuddyData = () => {
-    
     yourBuddyImg = paintCanvas.toDataURL();
     console.log(yourBuddyImg);
-    isDrawn = true;
-    replaceBuddy();
+    applyYourBuddy();
 }
 
 window.addEventListener("load", () => {

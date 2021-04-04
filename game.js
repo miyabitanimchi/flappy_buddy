@@ -11,13 +11,15 @@ defaultBuddy.src = defaultImg;
 let yourBuddy;
 
 // The buddy you created, create a new Image() from the image class, and delete defaultBuddy
-const replaceBuddy = () => {
+const applyYourBuddy = () => {
     if (isDrawn === true) {
         yourBuddy = new Image();
         yourBuddy.src = yourBuddyImg;
-
         defaultBuddy = "";
-        console.log(yourBuddy);
+    } else {
+        defaultBuddy = new Image();
+        defaultBuddy.src = defaultImg;
+        yourBuddy = "";
     }
 }
 
@@ -55,7 +57,6 @@ gameCtx.fillText("Click here to play", 140, 200);
 gameCanvas.addEventListener("click", () => {
     if (isPlaying) {
     buddyDY = -7;
-    console.log("canvas clicked");
     } else {
         gameStarts();
     }
@@ -67,10 +68,7 @@ const gameStarts = () => {
         // to let you know that game is being played
         if (!isPlaying) {
             isPlaying = true;
-            }
-        
-        // //Implement img
-        // showImgWithTransparentBG("buddy.jpeg");
+         }
 
         // Set the background color 
         gameCtx.fillStyle = "white";
@@ -118,7 +116,7 @@ const gameStarts = () => {
         // Create bullet
         gameCtx.fillRect(bulletX, bulletY, pipeWidth, 10);
         // start with other elements like score
-        gameCtx.fillStyle = "blue";
+        gameCtx.fillStyle = "black";
         gameCtx.font = '15px sans-serif';
         gameCtx.fillText(score++, 10, 25); // Increase and draw score
 
@@ -161,5 +159,3 @@ const gameStarts = () => {
     score = 0;
     isPlaying = false;
  }
-
-// if (((buddyY <= bulletY) && (bulletY < bottomOfImg)) && (pipeX < yourBuddySize * 3)) {
