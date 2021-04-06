@@ -12,11 +12,11 @@ let yourBuddy;
 
 // The buddy you created, create a new Image() from the image class, and delete defaultBuddy
 const applyYourBuddy = () => {
-    if (isDrawn === true) {
+    if (isDrawn === true) {  // If user drew something
         yourBuddy = new Image();
         yourBuddy.src = yourBuddyImg;
         defaultBuddy = "";
-    } else {
+    } else { // If user didn't draw anything
         defaultBuddy = new Image();
         defaultBuddy.src = defaultImg;
         yourBuddy = "";
@@ -88,7 +88,6 @@ const gameStarts = () => {
 
         // Prepare pipe
         gameCtx.fillStyle = "blue";
-        // gameCtx.fillStyle = "green";
         pipeX -= 8; //Move pipe
         pipeX < -pipeWidth && // Pipe off screen
         ((pipeX = canvasSizeY), (topPipeBottomY = pipeGap * Math.random())); //Reset pipe and randomize gap
@@ -144,7 +143,6 @@ const gameStarts = () => {
         if (!isPlaying) {
             gameCtx.font = '20px sans-serif';
             gameCtx.fillText("Game Over... click here to play again!", 70, 170);
-            console.log(yourBuddyImg);
         }
     }, 25);    
 }

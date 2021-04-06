@@ -63,9 +63,3 @@ footer {
     text-align: center;
     font-size: 0.9rem;
 }
-
-/* @media screen and (max-width: 600px) {
-    .container, footer {
-        display: none;
-    }
-} */

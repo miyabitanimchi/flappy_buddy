@@ -7,8 +7,8 @@ const paintCanvasHeight = 320;
 const gridSize = 10;
 let isDrawing = isErasing = eraserActivated = isDrawn = false; 
 let mouseX, mouseY, x, y;
-let defaultImg = "flappybird.png"; // if user didn't write anything
-let yourBuddyImg;
+let defaultImg = "flappybird.png"; // if user didn't draw anything, use this image
+let yourBuddyImg; // Variable to assign the drawing user draws
 
 // Border for paint canvas
 paintCanvas.style.border = "1px solid lightgray";
@@ -70,9 +70,7 @@ const drawSquare = () => {
             isErasing = true; // true to get ready to erase
         }
         getCoordinateOfEachGrid();
-        makeSquare(x, y, gridSize, true);
-        console.log(x, y);
-        
+        makeSquare(x, y, gridSize, true); 
     });
     paintCanvas.addEventListener("mousemove", e => {
         mouseX = e.offsetX;
@@ -91,11 +89,12 @@ const drawSquare = () => {
     });
 }
 
-// Find each coordinate of each square
+// Find each top-left coordinate of each square 
 const getCoordinateOfEachGrid = () => {
     let col = Math.floor(mouseX / gridSize);
     let row = Math.floor(mouseY / gridSize);
-    // modified to detect (x, y) for each grid
+
+    // get top-left coordinate
     x = col * gridSize; 
     y = row * gridSize;
 }
@@ -108,6 +107,7 @@ document.getElementById("trash-btn").addEventListener("click", () => {
     isDrawing = isErasing = eraserActivated = isDrawn = false; 
     document.getElementById("eraser-btn").classList.remove("activate-eraser");
     document.getElementById("pen-btn").classList.add("activate-pen");
+    applyYourBuddy(); // This is for situation if user did not draw anything after deletion
 })
 
 // eraser
@@ -129,12 +129,11 @@ const activePen = () => {
 // Get buddy data 
 const getBuddyData = () => {
     yourBuddyImg = paintCanvas.toDataURL();
-    console.log(yourBuddyImg);
     applyYourBuddy();
 }
 
 window.addEventListener("load", () => {
     makeGrid(paintCanvasWidth, paintCanvasHeight);
     drawSquare();
-    activePen();
+    activePen(); // Activate pen as a defalut
 });
