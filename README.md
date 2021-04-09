@@ -2,4 +2,6 @@
 ## Flappy-bird game but with your original character!
 
 ### Test image
-<img src="flappybird.png" style="text-align:center">
+<p align="center">
+    <img src="flappybird.png" alt="test image">
+</p>
