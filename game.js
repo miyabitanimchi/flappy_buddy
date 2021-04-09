@@ -62,9 +62,9 @@ gameCanvas.addEventListener("click", () => {
     }
 });
 
-// main loop to begin the game!
+// main loop to begin the game
 const gameStarts = () => {
-    const gameLoop = setInterval(() => {
+    const renderGame = setInterval(() => {
         // to let you know that game is being played
         if (!isPlaying) {
             isPlaying = true;
@@ -77,9 +77,9 @@ const gameStarts = () => {
         gameCtx.fillRect(0, 0, canvasSizeX, canvasSizeY);
 
         // Draw buddy
-        if (isDrawn === true) {
-            gameCtx.drawImage(yourBuddy, buddyX, buddyY, yourBuddySize * 2, yourBuddySize * 2)
-        } else {
+        if (isDrawn === true) { // User draws something
+            gameCtx.drawImage(yourBuddy, buddyX, buddyY, yourBuddySize * 2, yourBuddySize * 2) 
+        } else { // User didn't draw anything
             gameCtx.drawImage(defaultBuddy, buddyX, buddyY, yourBuddySize * 2, yourBuddySize * 2);
         }
 
@@ -89,19 +89,19 @@ const gameStarts = () => {
         // Prepare pipe
         gameCtx.fillStyle = "blue";
         pipeX -= 8; //Move pipe
-        pipeX < -pipeWidth && // Pipe off screen
+        pipeX < -pipeWidth && // Pipe out of screen
         ((pipeX = canvasSizeY), (topPipeBottomY = pipeGap * Math.random())); //Reset pipe and randomize gap
 
         // Prepare bullet
-        bulletX -= 15;
-        bulletX < -pipeWidth &&
-        ((bulletX = canvasSizeY), (bulletY = 400 * Math.random()));
+        bulletX -= 15; //Move bullet
+        bulletX < -pipeWidth &&  // Bullet out of screen
+        ((bulletX = canvasSizeY), (bulletY = 400 * Math.random())); //Reset bullet and randomize the position
 
         // get the data of the gap between the top to bullet
         fromBottomToBulletY = canvasSizeY - bulletY;
 
         //Get y coordinate for the bottom of the image
-        bottomOfImg = buddyY + (yourBuddySize * 3);
+        bottomOfImg = buddyY + (yourBuddySize * 2);
 
         // create pipes
         gameCtx.fillRect(pipeX, 0, pipeWidth, topPipeBottomY);
@@ -124,20 +124,20 @@ const gameStarts = () => {
         gameCtx.fillText(`Best score : ${bestScore}`, 10, 45);
 
         // buddy hit pipe
-        if (((buddyY < topPipeBottomY || buddyY > topPipeBottomY + pipeGap) && pipeX < yourBuddySize * 2)) {
+        if (((buddyY < topPipeBottomY || (buddyY + yourBuddySize) > (topPipeBottomY + pipeGap)) && pipeX < yourBuddySize * 2)) {
             resetGame();
-            clearInterval(gameLoop);
+            clearInterval(renderGame);
         }
         // buddy hit bullet
-        if (((buddyY <= bulletY) && (bulletY < bottomOfImg)) && (bulletX < yourBuddySize * 3 / 1.5)) {
+        if (((buddyY <= bulletY) && (bulletY < bottomOfImg)) && (bulletX < yourBuddySize * 2)) {
             resetGame();
-            clearInterval(gameLoop);
+            clearInterval(renderGame);
         }
 
         // buddy falls
         if (buddyY > canvasSizeY) {
             resetGame();
-            clearInterval(gameLoop);
+            clearInterval(renderGame);
         }
 
         if (!isPlaying) {
