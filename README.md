@@ -15,8 +15,8 @@ This is a trainig project and is to learn about HTML canvas, how games on canvas
 
 
 ### Technologies
-• Vanilla JS
-• HTML
-• CSS
+• Vanilla JS <br>
+• HTML <br>
+• CSS <br>
 
 
