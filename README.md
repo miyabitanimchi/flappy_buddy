@@ -7,7 +7,7 @@
     <img src="flappybird.png" alt="test image">
 </p>
 
-![flappyBird-gif](https://user-images.githubusercontent.com/69213541/114286959-f927ea00-9a17-11eb-85bf-56f25d013628.gif）
+![flappy-buddy](https://user-images.githubusercontent.com/69213541/114287130-4eb0c680-9a19-11eb-8ccd-0a9646e707b2.gif)
 
 
 [Try it!:bird:](https://miyabitanimchi.github.io/flappy_buddy/)
