@@ -62,7 +62,7 @@ gameCanvas.addEventListener("click", () => {
     }
 });
 
-// main loop to begin the game
+// Main loop to begin the game
 const gameStarts = () => {
     const renderGame = setInterval(() => {
         // to let you know that game is being played
