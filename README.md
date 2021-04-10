@@ -2,10 +2,7 @@
 # Flappy_buddy
 ### Flappy-bird game but playing with your original character!
 
-<p align="center">
 ![flappy-buddy](https://user-images.githubusercontent.com/69213541/114287130-4eb0c680-9a19-11eb-8ccd-0a9646e707b2.gif)
-</p>
-
 
 [Try it!]:bird:(https://miyabitanimchi.github.io/flappy_buddy/)
 
