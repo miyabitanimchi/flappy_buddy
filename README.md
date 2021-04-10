@@ -4,8 +4,8 @@
 
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/69213541/114287130-4eb0c680-9a19-11eb-8ccd-0a9646e707b2.gif" alt="flappy-buddy" />
-  👉[Try it!](https://miyabitanimchi.github.io/flappy_buddy/)
+  <img src="https://user-images.githubusercontent.com/69213541/114287130-4eb0c680-9a19-11eb-8ccd-0a9646e707b2.gif" alt="flappy-buddy" /><br>
+  [Try it!](https://miyabitanimchi.github.io/flappy_buddy/)
 </p>
 
 
