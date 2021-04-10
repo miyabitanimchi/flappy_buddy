@@ -19,5 +19,4 @@ This is a trainig project and is to learn about HTML canvas, how games on canvas
 • HTML
 • CSS
 
-### 
 
