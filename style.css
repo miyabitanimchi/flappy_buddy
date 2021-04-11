@@ -61,5 +61,10 @@ canvas {
 
 footer {
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
+    margin-top: 10px;
+}
+
+.fab {
+    font-size: 1.2rem;
 }
