@@ -26,3 +26,13 @@ This is a trainig project and is to learn about HTML canvas, and how games on ca
 • Playing with a default buddy(Flappy Bird), if you didn't draw anything <br>
 • Also bullets as obstacles
 
+## My challenges
+• Making grid on the canvas <br>
+• Finding specific coordinate to make a picel art <br>
+• Making the game loop <br>
+• Randomizing the positions of the obstacles <br>
+• Finding coordinate to detect obstacles
+
+## License
+[MIT](https://github.com/miyabitanimchi/flappy_buddy/blob/master/LICENSE)
+
