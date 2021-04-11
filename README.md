@@ -1,7 +1,6 @@
 
 # Flappy_buddy
 ## Flappy-bird game but playing with your original character!
-[![last_commit](https://img.shields.io/github/last-commit/miyabitanimichi/flappy_buddy)](https://github.com/miyabitanimchi/flappy_buddy)
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/69213541/114287130-4eb0c680-9a19-11eb-8ccd-0a9646e707b2.gif" alt="flappy-buddy" /><br>
@@ -15,7 +14,7 @@ This is a Flappy Bird game with two original features. One is that you can also 
 This is a trainig project and is to learn about HTML canvas, and how games on canvas work.
 
 
-### Technologies
+### Languages
 • Vanilla JS <br>
 • HTML <br>
 • CSS <br>
