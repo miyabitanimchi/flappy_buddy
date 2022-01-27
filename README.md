@@ -15,7 +15,7 @@ This is a trainig project and is to learn about HTML canvas, and how games on ca
 
 
 ## Built with
-• Vanilla JS <br>
+• JavaScript <br>
 • HTML <br>
 • CSS <br>
 
